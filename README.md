@@ -13,23 +13,6 @@ The application is built with robustness in mind, featuring asynchronous process
 - **CORS Enabled**: Properly configured to allow requests from a frontend application.
 - **Performance Timers**: Includes timers to measure model inference times.
 
-## Project Structure
-
-signature_verification_backend/
-├── venv/
-├── app/
-│ ├── init.py # Makes 'app' a Python package
-│ ├── main.py # Main FastAPI application, endpoints
-│ ├── models.py # Pydantic models for request/response validation
-│ ├── utils.py # Helper functions (image conversion, timers)
-│ ├── model_loader.py # Logic for loading ML models on startup
-├── models_weights/
-│ ├── cyclegan_model.pth # Placeholder for the cleaning model
-│ └── siamese_transformer.pth # Placeholder for the matching model
-├── .env # Environment variables
-├── README.md # This file
-└── requirements.txt # Python dependencies
-
 ## Setup and Installation
 
 1.  **Clone the repository (or set up the folder structure as above).**
@@ -77,9 +60,9 @@ uvicorn app.main:app --reload
 
 - --reload: This enables auto-reloading, so the server will restart whenever you make changes to the code.
 
-The application will be available at [suspicious link removed].
+The application will be available at http://127.0.0.1:8000.
 
-You can access the auto-generated API documentation at https://www.google.com/search?q=http://127.0.0.1:8000/docs.
+You can access the auto-generated API documentation at http://127.0.0.1:8000/docs.
 
 ## API Documentation
 
