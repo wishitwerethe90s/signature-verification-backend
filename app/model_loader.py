@@ -3,15 +3,19 @@
 import torch
 import os
 from dotenv import load_dotenv
+from .cleaner import SignatureCleaner
 
 # Load environment variables from .env file
 load_dotenv()
 
 MODEL_ERROR_BYPASS_FLAG = os.getenv("MODEL_ERROR_BYPASS_FLAG", "False").lower() == "true"
 
+# Define the correct path to your trained model
+CLEANING_MODEL_PATH = "checkpoints/latest_net_G.pth"
+
 def load_cleaning_model(path: str):
     """
-    Loads the CycleGAN model for signature cleaning.
+    Loads the pix2pix model for signature cleaning.
     Returns the model or None if it fails and bypass is enabled.
     """
     print("Attempting to load signature cleaning model...")
@@ -23,11 +27,8 @@ def load_cleaning_model(path: str):
         raise FileNotFoundError(f"Cleaning model not found at {path}")
     
     try:
-        # This is where you would load your actual PyTorch model
-        # For demonstration, we'll just return a dummy object.
-        # model = torch.load(path)
-        # model.eval() 
-        model = "DummyCleaningModel" # Replace with actual model loading
+        # Use the SignatureCleaner class to load the real model
+        model = SignatureCleaner(path, gpu_id=-1) # Use gpu_id=0 for GPU
         print("Signature cleaning model loaded successfully.")
         return model
     except Exception as e:
@@ -67,7 +68,7 @@ def load_matching_model(path: str):
         raise e
 
 # --- Model Paths ---
-CLEANING_MODEL_PATH = "models_weights/cyclegan_model.pth"
+CLEANING_MODEL_PATH = "models_weights/pix2pix_model.pth"
 MATCHING_MODEL_PATH = "models_weights/siamese_transformer.pth"
 
 # --- Load Models on Startup ---

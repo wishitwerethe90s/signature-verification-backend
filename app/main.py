@@ -73,13 +73,7 @@ async def clean_signatures(request: CleanRequest):
                     # Bypass mode: return the original image
                     cleaned_image = placeholder_clean_image(input_image)
                 else:
-                    # Real model inference would go here
-                    # Example:
-                    # transformed_image = transform(input_image)
-                    # cleaned_tensor = cleaning_model(transformed_image.unsqueeze(0))
-                    # cleaned_image = to_pil_image(cleaned_tensor.squeeze(0))
-                    # For now, we use the placeholder
-                    cleaned_image = placeholder_clean_image(input_image)
+                    cleaned_image = cleaning_model.clean(input_image)
 
                 cleaned_base64 = image_to_base64(cleaned_image)
                 return ImagePayload(id=img_payload.id, data=cleaned_base64)
